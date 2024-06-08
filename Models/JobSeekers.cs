@@ -1,6 +1,6 @@
 ﻿namespace _1670WebApplication.Models
 {
-    public class JobSeeker
+    public class JobSeekers
     {
         public int ID { get; set; }
         public int AccountID { get; set; }

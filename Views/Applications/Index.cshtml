@@ -1,65 +1,40 @@
 ﻿@model IEnumerable<_1670WebApplication.Models.Application>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Application Page";
 }
 
-<h1>Index</h1>
+<h1>Applications</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-sm btn-primary">Add New Application</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoverLetter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SelfIntroduction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobSeeker)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobList)
-            </th>
-            <th></th>
+            <th>JobList</th>
+            <th>JobSeeker</th>
+            <th>SelfIntroduction</th>
+            <th>CoverLetter</th>
+            <th>Resume</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoverLetter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SelfIntroduction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobSeeker.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobList.ID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.JobList</td>
+                <td>@application.JobSeeker</td>
+                <td>@application.SelfIntroduction</td>
+                <td>@application.CoverLetter</td>
+                <td>@application.Status</td>
+                <td><img src="~/images/@application.Resume" class="rounded-cycle" width="100" height="100" /></td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@application.ID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@application.ID">Delete</a>
+                </td>
+            </tr>
 }
     </tbody>
 </table>

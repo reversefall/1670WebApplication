@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0peCYHXg7t2sV0WYmVLafZIuaDbSQlNBX2h+B08WZHM=",
+  "Hash": "K5yqEPDmvC+c7N+ZOgIKTYCu0S4AkCfnA9P4/E1Sfco=",
   "Source": "1670WebApplication",
   "BasePath": "_content/1670WebApplication",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\images\\81f6681f-0547-4f5e-80fb-977b8e31cae0_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg",
+      "SourceId": "1670WebApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\",
+      "BasePath": "_content/1670WebApplication",
+      "RelativePath": "images/81f6681f-0547-4f5e-80fb-977b8e31cae0_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\81f6681f-0547-4f5e-80fb-977b8e31cae0_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\images\\c6dea00e-7af5-4f23-a963-aeaa261482ea_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg",
+      "SourceId": "1670WebApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\",
+      "BasePath": "_content/1670WebApplication",
+      "RelativePath": "images/c6dea00e-7af5-4f23-a963-aeaa261482ea_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c6dea00e-7af5-4f23-a963-aeaa261482ea_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg"
     },
     {
       "Identity": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\js\\site.js",

@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\images\\81f6681f-0547-4f5e-80fb-977b8e31cae0_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg",
+      "PackagePath": "staticwebassets\\images\\81f6681f-0547-4f5e-80fb-977b8e31cae0_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\images\\c6dea00e-7af5-4f23-a963-aeaa261482ea_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg",
+      "PackagePath": "staticwebassets\\images\\c6dea00e-7af5-4f23-a963-aeaa261482ea_pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Desktop\\1670WEB\\1670WebApplication\\1670WebApplication\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -22,20 +22,20 @@ namespace _1670WebApplication.Controllers
         // GET: JobSeekers
         public async Task<IActionResult> Index()
         {
-              return _context.JobSeeker != null ? 
-                          View(await _context.JobSeeker.ToListAsync()) :
+              return _context.JobSeekers != null ? 
+                          View(await _context.JobSeekers.ToListAsync()) :
                           Problem("Entity set '_1670WebApplicationContext.JobSeeker'  is null.");
         }
 
         // GET: JobSeekers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.JobSeeker == null)
+            if (id == null || _context.JobSeekers == null)
             {
                 return NotFound();
             }
 
-            var jobSeeker = await _context.JobSeeker
+            var jobSeeker = await _context.JobSeekers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (jobSeeker == null)
             {
@@ -56,7 +56,7 @@ namespace _1670WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,AccountID,FirstName,LastName,Phone,Email,Resume,CoverLetter")] JobSeeker jobSeeker)
+        public async Task<IActionResult> Create([Bind("ID,AccountID,FirstName,LastName,Phone,Email,Resume,CoverLetter")] JobSeekers jobSeeker)
         {
             if (ModelState.IsValid)
             {
@@ -70,12 +70,12 @@ namespace _1670WebApplication.Controllers
         // GET: JobSeekers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.JobSeeker == null)
+            if (id == null || _context.JobSeekers == null)
             {
                 return NotFound();
             }
 
-            var jobSeeker = await _context.JobSeeker.FindAsync(id);
+            var jobSeeker = await _context.JobSeekers.FindAsync(id);
             if (jobSeeker == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace _1670WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,AccountID,FirstName,LastName,Phone,Email,Resume,CoverLetter")] JobSeeker jobSeeker)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,AccountID,FirstName,LastName,Phone,Email,Resume,CoverLetter")] JobSeekers jobSeeker)
         {
             if (id != jobSeeker.ID)
             {
@@ -121,12 +121,12 @@ namespace _1670WebApplication.Controllers
         // GET: JobSeekers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.JobSeeker == null)
+            if (id == null || _context.JobSeekers == null)
             {
                 return NotFound();
             }
 
-            var jobSeeker = await _context.JobSeeker
+            var jobSeeker = await _context.JobSeekers
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (jobSeeker == null)
             {
@@ -141,14 +141,14 @@ namespace _1670WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.JobSeeker == null)
+            if (_context.JobSeekers == null)
             {
                 return Problem("Entity set '_1670WebApplicationContext.JobSeeker'  is null.");
             }
-            var jobSeeker = await _context.JobSeeker.FindAsync(id);
+            var jobSeeker = await _context.JobSeekers.FindAsync(id);
             if (jobSeeker != null)
             {
-                _context.JobSeeker.Remove(jobSeeker);
+                _context.JobSeekers.Remove(jobSeeker);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace _1670WebApplication.Controllers
 
         private bool JobSeekerExists(int id)
         {
-          return (_context.JobSeeker?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.JobSeekers?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

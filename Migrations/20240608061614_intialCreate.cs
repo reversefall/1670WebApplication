@@ -85,7 +85,7 @@ namespace _1670WebApplication.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobSeeker",
+                name: "JobSeekers",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -101,9 +101,9 @@ namespace _1670WebApplication.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobSeeker", x => x.ID);
+                    table.PrimaryKey("PK_JobSeekers", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_JobSeeker_User_UserID",
+                        name: "FK_JobSeekers_User_UserID",
                         column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "ID");
@@ -145,39 +145,40 @@ namespace _1670WebApplication.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    JobSeekerID = table.Column<int>(type: "int", nullable: false),
-                    JobListingID = table.Column<int>(type: "int", nullable: false),
+                    JobSeekersID = table.Column<int>(type: "int", nullable: false),
+                    JobListID = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Resume = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Resume = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CoverLetter = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Application", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Application_JobList_JobListingID",
-                        column: x => x.JobListingID,
+                        name: "FK_Application_JobList_JobListID",
+                        column: x => x.JobListID,
                         principalTable: "JobList",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Application_JobSeeker_JobSeekerID",
-                        column: x => x.JobSeekerID,
-                        principalTable: "JobSeeker",
+                        name: "FK_Application_JobSeekers_JobSeekersID",
+                        column: x => x.JobSeekersID,
+                        principalTable: "JobSeekers",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Application_JobListingID",
+                name: "IX_Application_JobListID",
                 table: "Application",
-                column: "JobListingID");
+                column: "JobListID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Application_JobSeekerID",
+                name: "IX_Application_JobSeekersID",
                 table: "Application",
-                column: "JobSeekerID");
+                column: "JobSeekersID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employer_UserID",
@@ -195,8 +196,8 @@ namespace _1670WebApplication.Migrations
                 column: "EmployerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobSeeker_UserID",
-                table: "JobSeeker",
+                name: "IX_JobSeekers_UserID",
+                table: "JobSeekers",
                 column: "UserID");
         }
 
@@ -213,7 +214,7 @@ namespace _1670WebApplication.Migrations
                 name: "JobList");
 
             migrationBuilder.DropTable(
-                name: "JobSeeker");
+                name: "JobSeekers");
 
             migrationBuilder.DropTable(
                 name: "Category");

@@ -13,6 +13,7 @@ namespace _1670WebApplication.Controllers
     public class EmployersController : Controller
     {
         private readonly _1670WebApplicationContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public EmployersController(_1670WebApplicationContext context)
         {

@@ -26,6 +26,6 @@ namespace _1670WebApplication.Data
 
         public DbSet<_1670WebApplication.Models.Employer> Employer { get; set; } = default!;
 
-        public DbSet<_1670WebApplication.Models.JobSeeker> JobSeeker { get; set; } = default!;
+        public DbSet<_1670WebApplication.Models.JobSeekers> JobSeekers { get; set; } = default!;
     }
 }

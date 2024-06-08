@@ -55,14 +55,17 @@ namespace _1670WebApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JobListingID")
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobListID")
                         .HasColumnType("int");
 
-                    b.Property<int>("JobSeekerID")
+                    b.Property<int>("JobSeekersID")
                         .HasColumnType("int");
 
                     b.Property<string>("Resume")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SelfIntroduction")
@@ -75,9 +78,9 @@ namespace _1670WebApplication.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("JobListingID");
+                    b.HasIndex("JobListID");
 
-                    b.HasIndex("JobSeekerID");
+                    b.HasIndex("JobSeekersID");
 
                     b.ToTable("Application");
                 });
@@ -175,7 +178,7 @@ namespace _1670WebApplication.Migrations
                     b.ToTable("JobList");
                 });
 
-            modelBuilder.Entity("_1670WebApplication.Models.JobSeeker", b =>
+            modelBuilder.Entity("_1670WebApplication.Models.JobSeekers", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -217,7 +220,7 @@ namespace _1670WebApplication.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("JobSeeker");
+                    b.ToTable("JobSeekers");
                 });
 
             modelBuilder.Entity("_1670WebApplication.Models.User", b =>
@@ -264,13 +267,13 @@ namespace _1670WebApplication.Migrations
                 {
                     b.HasOne("_1670WebApplication.Models.JobList", "JobList")
                         .WithMany("Applications")
-                        .HasForeignKey("JobListingID")
+                        .HasForeignKey("JobListID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("_1670WebApplication.Models.JobSeeker", "JobSeeker")
+                    b.HasOne("_1670WebApplication.Models.JobSeekers", "JobSeeker")
                         .WithMany("Applications")
-                        .HasForeignKey("JobSeekerID")
+                        .HasForeignKey("JobSeekersID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -309,7 +312,7 @@ namespace _1670WebApplication.Migrations
                     b.Navigation("Employer");
                 });
 
-            modelBuilder.Entity("_1670WebApplication.Models.JobSeeker", b =>
+            modelBuilder.Entity("_1670WebApplication.Models.JobSeekers", b =>
                 {
                     b.HasOne("_1670WebApplication.Models.User", "User")
                         .WithMany("JobSeekers")
@@ -333,7 +336,7 @@ namespace _1670WebApplication.Migrations
                     b.Navigation("Applications");
                 });
 
-            modelBuilder.Entity("_1670WebApplication.Models.JobSeeker", b =>
+            modelBuilder.Entity("_1670WebApplication.Models.JobSeekers", b =>
                 {
                     b.Navigation("Applications");
                 });

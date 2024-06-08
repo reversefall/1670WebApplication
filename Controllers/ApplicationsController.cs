@@ -7,24 +7,72 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _1670WebApplication.Data;
 using _1670WebApplication.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace _1670WebApplication.Controllers
 {
     public class ApplicationsController : Controller
     {
         private readonly _1670WebApplicationContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ApplicationsController(_1670WebApplicationContext context)
+
+        public ApplicationsController(_1670WebApplicationContext dbcontext, IWebHostEnvironment webHostEnvironment)
         {
-            _context = context;
+            _context = dbcontext;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Applications
         public async Task<IActionResult> Index()
         {
-            var _1670WebApplicationContext = _context.Application.Include(a => a.JobList).Include(a => a.JobSeeker);
-            return View(await _1670WebApplicationContext.ToListAsync());
+            var applications = await _context.Application.ToListAsync();
+            return View(applications);
+            //var _1670WebApplicationContext = _context.Application.Include(a => a.JobList).Include(a => a.JobSeeker);
+            //return View(await _1670WebApplicationContext.ToListAsync());
         }
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        /*public async Task<IActionResult> Add(Application model)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = UploadedFile(model);
+                Application application = new Application
+                {
+                    Status = model.Status,
+                    Resume = model.Resume,
+                    CoverLetter = model.CoverLetter,
+                    SelfIntroduction = model.SelfIntroduction,
+                    JobList = model.JobList,
+                    JobSeeker = model.JobSeeker,
+                };
+                _context.Add(application);
+            }
+            // ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID", application.JobListingID);
+            //ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeeker>(), "ID", "ID", application.JobSeekerID);
+            return View();
+        }
+        private string UploadedFile(Application model)
+        {
+            string uniqueFileName = null;
+            if (model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string filepath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filepath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+
+            }
+            return uniqueFileName;
+        }*/
 
         // GET: Applications/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -47,19 +95,20 @@ namespace _1670WebApplication.Controllers
         }
 
         // GET: Applications/Create
+        // GET: Applications/Create
         public IActionResult Create()
         {
-            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID");
-            ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeeker>(), "ID", "ID");
+            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "JobTitle");
+            ViewData["JobSeekerID"] = new SelectList(_context.JobSeekers, "ID", "FullName");
             return View();
         }
+
 
         // POST: Applications/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,JobSeekerID,JobListingID,Status,Resume,CoverLetter,SelfIntroduction")] Application application)
+
+        /*public async Task<IActionResult> Create([Bind("ID,JobSeekerID,JobListingID,Status,Resume,CoverLetter,SelfIntroduction")] Application application)
         {
             if (ModelState.IsValid)
             {
@@ -67,10 +116,51 @@ namespace _1670WebApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID", application.JobListingID);
-            ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeeker>(), "ID", "ID", application.JobSeekerID);
             return View(application);
+        }*/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,JobSeekerID,JobListingID,Status,Resume,CoverLetter,SelfIntroduction")] Application model)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = UploadedFile(model);
+                Application application = new Application
+                {
+                    Status = model.Status,
+                    Resume = model.Resume,
+                    CoverLetter = model.CoverLetter,
+                    SelfIntroduction = model.SelfIntroduction,
+                    JobListID = model.JobListID,
+                    JobSeekersID = model.JobSeekersID,
+                    ImagePath = uniqueFileName
+
+
+                };
+                _context.Add(application);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "JobTitle", model.JobListID);
+            ViewData["JobSeekerID"] = new SelectList(_context.JobSeekers, "ID", "FullName", model.JobSeekersID);
+            return View(model);
         }
+        private string UploadedFile(Application model)
+        {
+            string uniqueFileName = null;
+            if (model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string filepath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filepath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
 
         // GET: Applications/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -85,8 +175,8 @@ namespace _1670WebApplication.Controllers
             {
                 return NotFound();
             }
-            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID", application.JobListingID);
-            ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeeker>(), "ID", "ID", application.JobSeekerID);
+            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID", application.JobListID);
+            ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeekers>(), "ID", "ID", application.JobSeekersID);
             return View(application);
         }
 
@@ -122,8 +212,8 @@ namespace _1670WebApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID", application.JobListingID);
-            ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeeker>(), "ID", "ID", application.JobSeekerID);
+            ViewData["JobListingID"] = new SelectList(_context.JobList, "ID", "ID", application.JobListID);
+            ViewData["JobSeekerID"] = new SelectList(_context.Set<JobSeekers>(), "ID", "ID", application.JobSeekersID);
             return View(application);
         }
 

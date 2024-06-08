@@ -8,7 +8,7 @@
         public string Role { get; set; }
         public string Email { get; set; }
 
-        public ICollection<JobSeeker>? JobSeekers { get; set; }
+        public ICollection<JobSeekers>? JobSeekers { get; set; }
         public ICollection<Employer>? Employers { get; set; }
         public ICollection<Admin>? Admins { get; set; }
     }
